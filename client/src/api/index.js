@@ -5,3 +5,10 @@ export const getReservations = async () => {
   const data = await response.json();
   return data;
 }
+
+export const deleteReservation = async (id) => {
+  const response = await fetch(`${API_ENDPOINT}/${id}`, {
+    method: 'DELETE',
+  });
+  return response.status;
+}

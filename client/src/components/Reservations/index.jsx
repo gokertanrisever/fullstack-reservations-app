@@ -20,7 +20,11 @@ const Reservations = () => {
       <div className={styles.title}>Reservations</div>
       {/* <h1>Reservations</h1> */}
       {reservations.length > 0 && reservations.map(reservation => (
-        <ReservationItem key={reservation.id} reservation={reservation} />))
+        <ReservationItem 
+          key={reservation.id} 
+          reservation={reservation} 
+          setReservations={setReservations}
+        />))
       }
       {reservations.length === 0 && <div className={styles.empty}>There are no reservations</div>}
     </div>
