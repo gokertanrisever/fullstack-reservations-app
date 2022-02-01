@@ -1,7 +1,6 @@
 version: '3.8'
 
 x-common-variables: &common-variables
-  POSTGRES_DATABASE: ${DB_NAME}
   POSTGRES_USER: ${DB_USER}
   POSTGRES_PASSWORD: ${DB_PASSWORD}
 
@@ -39,6 +38,9 @@ services:
     environment:
       <<: *common-variables
       POSTGRES_HOST_IP: dbpostgres
+      PGUSER: ${DB_USER}
+      PGPASSWORD: ${DB_PASSWORD}
+      PGHOST: dbpostgres
       PORT: 8080
     container_name: backend
 

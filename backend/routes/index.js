@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../db');
 
 const RESERVATION_STATUS = {
   0: 'Todo',
@@ -15,9 +16,10 @@ const RESERVATIONS = [
   }
 ]
 
-router.get('/', (req, res) => {
-  console.log('requested')
-  res.json(RESERVATIONS);
+router.get('/', async (req, res) => {
+  let result = await db.getReservations();
+  if (!result) res.sendStatus(404);
+  else res.send(result);
 });
 
 router.delete('/:id', (req, res) => {

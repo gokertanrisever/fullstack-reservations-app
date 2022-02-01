@@ -5,7 +5,7 @@ import Button from "../Button";
 import { deleteReservation } from "../../api";
 
 const ReservationItem = ({ reservation, setReservations }) => {
-  let statusStyle = `status${reservation.status}`;
+  let statusStyle = `status${reservation.res_status}`;
 
   const handleDelete = async (id) => {
     let status = await deleteReservation(id);
@@ -21,7 +21,7 @@ const ReservationItem = ({ reservation, setReservations }) => {
       <div className={styles.name}>{reservation.name}</div>
       <div className={styles.action}>
         <div className={styles.actionItem}>
-          <span className={styles[statusStyle]} >{RESERVATION_STATUS[reservation.status]}</span>
+          <span className={styles[statusStyle]} >{RESERVATION_STATUS[reservation.res_status]}</span>
         </div>
         <div className={styles.actionItem}>
           <Button
