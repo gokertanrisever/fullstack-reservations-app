@@ -11,7 +11,6 @@ const RESERVATIONS = [
   {
     id: 1,
     name: 'Foo',
-    store: 'Test',
     status: 0,
   }
 ]
@@ -19,6 +18,17 @@ const RESERVATIONS = [
 router.get('/', (req, res) => {
   console.log('requested')
   res.json(RESERVATIONS);
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  const reservation = RESERVATIONS.find(r => r.id == id);
+  if (reservation) {
+    reservation.status = 2;
+    res.sendStatus(200);
+  } else {
+    res.status(404).send('Not found');
+  }
 })
 
 module.exports = router;
