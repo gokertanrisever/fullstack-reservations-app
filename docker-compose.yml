@@ -1,0 +1,55 @@
+version: '3.8'
+
+x-common-variables: &common-variables
+  POSTGRES_DATABASE: ${DB_NAME}
+  POSTGRES_USER: ${DB_USER}
+  POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+services:
+  dbpostgres:
+    image: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - "./setup.sql:/docker-entrypoint-initdb.d/setup.sql"
+    environment:
+      <<: *common-variables
+      POSTGRES_HOST: localhost
+
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3050:80"
+
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: "./backend"
+    depends_on:
+      - dbpostgres
+    volumes:
+      - /app/node_modules
+      - ./backend:/app
+    environment:
+      <<: *common-variables
+      POSTGRES_HOST_IP: dbpostgres
+      PORT: 8080
+    container_name: backend
+
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    container_name: client
