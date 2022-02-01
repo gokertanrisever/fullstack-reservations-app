@@ -46,3 +46,8 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+html, body, #root, .App {
+	height: 100%;
+	overflow: hidden;
+}
