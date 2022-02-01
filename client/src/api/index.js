@@ -1,4 +1,4 @@
-const API_ENDPOINT = `http://localhost:3050/api`;
+const API_ENDPOINT = `http://localhost:3050/api/`;
 
 export const getReservations = async () => {
   const response = await fetch(`${API_ENDPOINT}`);
@@ -11,4 +11,16 @@ export const deleteReservation = async (id) => {
     method: 'DELETE',
   });
   return response.status;
+}
+
+export const addReservation = async (name, status) => {
+  const response = await fetch(`${API_ENDPOINT}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, status }),
+  });
+  let newReservation = await response.json();
+  return newReservation;
 }

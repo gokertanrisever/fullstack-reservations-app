@@ -6,5 +6,19 @@ const getReservations = async () => {
   return result.rows;
 }
 
+const deleteReservation = async (id) => {
+  const result = await pool.query('DELETE FROM reservations WHERE id = $1', [id]);
+  return result.rows;
+};
 
-module.exports = { getReservations };
+const addReservation = async (id, name, status) => {
+  const result = await pool.query('INSERT INTO reservations (id, name, status) VALUES ($1, $2, $3)', [id, name, status]);
+  return result.rows;
+};
+
+
+module.exports = { 
+  getReservations,
+  deleteReservation,
+  addReservation
+};
