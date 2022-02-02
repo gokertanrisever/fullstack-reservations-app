@@ -3,13 +3,13 @@ import styles from "./index.module.css";
 import { RESERVATION_STATUS } from "../../constants";
 import Footer from "../Footer";
 import Button from "../Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addReservation } from "../../api";
 import Modal from "../Modal";
 import FadeLoader from "react-spinners/FadeLoader";
-import { useNavigate } from "react-router-dom";
 
-const ReservationForm = ({ children }) => {
+const ReservationForm = ({ children, setTitle }) => {
+  setTitle("Create Reservation");
   const [name, setName] = useState("");
   const [store, setStore] = useState("");
   const [status, setStatus] = useState(0);
@@ -33,10 +33,8 @@ const ReservationForm = ({ children }) => {
       <Modal show={isLoading}>
         <FadeLoader color="#000000" loading={true} size={150} />
       </Modal>
-      <div className={styles.title}>
-        <h1>Create Reservation</h1>
-      </div>
-      <form onSubmit={handleSubmit} className={styles.form}>
+
+      <form id="reservationForm" onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.label}>Reservation Name
           <input 
             required
@@ -70,15 +68,15 @@ const ReservationForm = ({ children }) => {
           ))}
           
         </label>
-        <Footer>
-          <Link to="/">
-            <Button className="cancel" >
-              Cancel
-            </Button>
-          </Link>
-          <Button className="create" type="submit">Create Reservation</Button>
-        </Footer>
       </form>
+      <Footer>
+        <Link to="/">
+          <Button className="cancel" >
+            Cancel
+          </Button>
+        </Link>
+        <Button form="reservationForm" className="create" type="submit">Create Reservation</Button>
+      </Footer>
     </div>
   );
 }

@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
+  flex-grow: 6;
+  margin: 2rem 2rem 0 2rem;
+  margin-bottom: 5rem;
 }
 
 .label {
@@ -21,7 +24,8 @@
   height: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  margin: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .radio {

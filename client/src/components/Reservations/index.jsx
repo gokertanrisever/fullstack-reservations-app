@@ -6,12 +6,13 @@ import Footer from "../Footer";
 import Button from "../Button";
 import FadeLoader from "react-spinners/FadeLoader";
 import { Link } from "react-router-dom";
+import Modal from "../Modal";
 
 
-const Reservations = () => {
+const Reservations = ({ setTitle }) => {
   const [reservations, setReservations] = useState([]);
   let [isLoading, setIsLoading] = useState(false);
-  let [color, setColor] = useState("#000000");
+  setTitle("Reservations");
 
   // Fetch data from server
   useEffect(() => {
@@ -26,34 +27,26 @@ const Reservations = () => {
 
   return (
     <div className={styles.reservations}>
-      <div className={styles.title}>
-        <h1>Reservations</h1>
+      <div className={styles.container}>
+        <div className={styles.list}>
+          {reservations.length > 0 && reservations.map(reservation => (
+            <ReservationItem 
+              key={reservation.id} 
+              reservation={reservation} 
+              setReservations={setReservations}
+            />
+            ))}
+          {reservations.length === 0 && !isLoading && <div className={styles.empty}>There are no reservations</div>}
+        </div>
       </div>
-      {!isLoading && (
-        <div>
-          <div>
-            {reservations.length > 0 && reservations.map(reservation => (
-              <ReservationItem 
-                key={reservation.id} 
-                reservation={reservation} 
-                setReservations={setReservations}
-              />
-              ))}
-            {reservations.length === 0 && !isLoading && <div className={styles.empty}>There are no reservations</div>}
-          </div>
-          <Footer>
-            <Link to="/create"> 
-              <Button className="create" >Create Reservation</Button>
-            </Link>
-          </Footer>
-
-        </div>
-      )}
-      {isLoading && (
-        <div className={styles.spinner}>
-          <FadeLoader color={color} loading={isLoading} size={150} />
-        </div>
-      )}
+      <Footer>
+        <Link to="/create"> 
+          <Button className="create" >Create Reservation</Button>
+        </Link>
+      </Footer>
+      <Modal show={isLoading}>
+        <FadeLoader color="#000000" loading={true} size={150} />
+      </Modal>
     </div>
   );
 }

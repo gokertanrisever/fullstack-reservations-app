@@ -1,15 +1,11 @@
 .footer {
-  position: fixed;
-  bottom: 0;
-  left: 0; 
   height: 3rem;
   border: 1px solid #000000;
-  width: 100%;
   padding: 1.5rem 2rem 0 2rem;
+  flex-grow: 1;
 }
 
 .container {
   display: flex;
   justify-content: space-evenly;
-  margin-right: 4rem;
 }
