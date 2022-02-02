@@ -1,0 +1,11 @@
+.dialogBox {
+  background-color: #fff;
+  margin: 0 2rem;
+  padding: 1rem;
+}
+
+.dialogBoxHeader {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}

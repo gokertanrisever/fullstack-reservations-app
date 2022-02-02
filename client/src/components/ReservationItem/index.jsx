@@ -4,16 +4,12 @@ import { RESERVATION_STATUS } from "../../constants";
 import Button from "../Button";
 import { deleteReservation } from "../../api";
 
-const ReservationItem = ({ reservation, setReservations }) => {
+const ReservationItem = ({ reservation, setReservations, setDialogOpen, setSelected }) => {
   let statusStyle = `status${reservation.res_status}`;
 
-  const handleDelete = async (id) => {
-    let status = await deleteReservation(id);
-    if (status !== 200) {
-      alert("Failed to delete reservation");
-      return;
-    }
-    setReservations(reservations =>  reservations.filter(res => res.id !== id));
+  const handleDelete = async (res) => {
+    setDialogOpen(true);
+    setSelected(res);
   }
 
   return (
@@ -26,7 +22,7 @@ const ReservationItem = ({ reservation, setReservations }) => {
         <div className={styles.actionItem}>
           <Button
             className="delete"
-            onClick={() => handleDelete(reservation.id)}
+            onClick={() => handleDelete(reservation)}
             >Delete</Button>
         </div>
       </div>
