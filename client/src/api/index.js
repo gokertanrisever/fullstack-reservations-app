@@ -13,14 +13,13 @@ export const deleteReservation = async (id) => {
   return response.status;
 }
 
-export const addReservation = async (name, status) => {
+export const addReservation = async (reservation) => {
   const response = await fetch(`${API_ENDPOINT}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ name, status }),
+    body: JSON.stringify(reservation),
   });
-  let newReservation = await response.json();
-  return newReservation;
+  return response.status;
 }

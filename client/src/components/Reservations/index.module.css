@@ -13,3 +13,11 @@
 .empty {
   margin-top: 2rem;
 }
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 100%;
+}

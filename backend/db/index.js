@@ -11,8 +11,8 @@ const deleteReservation = async (id) => {
   return result.rows;
 };
 
-const addReservation = async (id, name, status) => {
-  const result = await pool.query('INSERT INTO reservations (id, name, status) VALUES ($1, $2, $3)', [id, name, status]);
+const addReservation = async (id, name, store, status) => {
+  const result = await pool.query('INSERT INTO reservations (id, name, store, res_status) VALUES ($1, $2, $3, $4)', [id, name, store, status]);
   return result.rows;
 };
 

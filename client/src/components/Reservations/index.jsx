@@ -5,12 +5,8 @@ import ReservationItem from "../ReservationItem";
 import Footer from "../Footer";
 import Button from "../Button";
 import FadeLoader from "react-spinners/FadeLoader";
-import { css } from "@emotion/react";
+import { Link } from "react-router-dom";
 
-const override = css`
-  // display: block;
-  margin: auto;
-`;
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -33,20 +29,31 @@ const Reservations = () => {
       <div className={styles.title}>
         <h1>Reservations</h1>
       </div>
-      <div>
-        {reservations.length > 0 && reservations.map(reservation => (
-          <ReservationItem 
-            key={reservation.id} 
-            reservation={reservation} 
-            setReservations={setReservations}
-          />
-          ))}
-        {reservations.length === 0 && !isLoading && <div className={styles.empty}>There are no reservations</div>}
-        <FadeLoader color={color} loading={isLoading} size={150} css={override} />
-      </div>
-      <Footer>
-        <Button className="create" to="/reservations/new">Create Reservation</Button>
-      </Footer>
+      {!isLoading && (
+        <div>
+          <div>
+            {reservations.length > 0 && reservations.map(reservation => (
+              <ReservationItem 
+                key={reservation.id} 
+                reservation={reservation} 
+                setReservations={setReservations}
+              />
+              ))}
+            {reservations.length === 0 && !isLoading && <div className={styles.empty}>There are no reservations</div>}
+          </div>
+          <Footer>
+            <Link to="/create"> 
+              <Button className="create" >Create Reservation</Button>
+            </Link>
+          </Footer>
+
+        </div>
+      )}
+      {isLoading && (
+        <div className={styles.spinner}>
+          <FadeLoader color={color} loading={isLoading} size={150} />
+        </div>
+      )}
     </div>
   );
 }

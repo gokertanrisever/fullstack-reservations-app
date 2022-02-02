@@ -26,9 +26,9 @@ router.delete('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const { name, status } = req.body;
+  const { name, store, status } = req.body;
   const id = uuidv4();
-  let result = await db.addReservation(id, name, status);
+  await db.addReservation(id, name, store, status);
   res.sendStatus(200);
 });
 
