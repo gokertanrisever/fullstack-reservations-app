@@ -1,5 +1,5 @@
 # Fullstack Assignment <!-- omit in toc -->
-This project allows de Bijenkorf's Hiring Managers to screen potential Fullstack Developer applicants.
+Fullstack Reservation CRUD App with ExpressJS, ReactJS, PostgreSQL, Docker and nginx
 
 # Table of Contents <!-- omit in toc -->
 - [Folder structure](#folder-structure)
